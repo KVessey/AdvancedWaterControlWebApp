@@ -9,12 +9,12 @@ To begin using the Advanced Water Control Web App, use the following steps to ge
 
 ## Setup
 ### Python Packages
-1)First we need to make sure Python is installed and up to date. On windows, open the command prompt and enter:
-> python -V
+1. First we need to make sure Python is installed and up to date. On windows, open the command prompt and enter:
+> `python -V`
 
 User should see a python version. If your version is less than 3, it is best to update to the latest version of python
 
-2)Check the version of pip
+2. Check the version of pip
 On windows, open the command prompt and enter:
 > pip -V
 
