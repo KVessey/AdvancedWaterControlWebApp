@@ -5,7 +5,7 @@ The Advanced Water Control Web Application (AWCWA) is an admin dashboard which l
 ## Download and Installation
 
 To begin using the Advanced Water Control Web App, use the following steps to get started:
-* [Fork, Clone, or Download on GitHub](https://github.com/KVessey/AdvancedWaterControlWebApp)
+* [Fork, Clone, or Download on GitHub](https://github.com/KVessey/AdvancedWaterControlWebApp) Advance Water Control Web App
 
 ## Usage
 
