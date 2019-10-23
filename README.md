@@ -1,4 +1,4 @@
-## Avanced Water Control Web Application
+## Advanced Water Control Web Application
 
 The Advanced Water Control Web Application (AWCWA) is an admin dashboard which leverages Raspberry Pi devices to manage water across multiple properties via a single web app
 
@@ -6,6 +6,9 @@ The Advanced Water Control Web Application (AWCWA) is an admin dashboard which l
 
 To begin using the Advanced Water Control Web App, use the following steps to get started:
 * [Fork, Clone, or Download on GitHub](https://github.com/KVessey/AdvancedWaterControlWebApp) Advance Water Control Web App
+
+### Setup
+### DB Setup
 
 ## Usage
 
