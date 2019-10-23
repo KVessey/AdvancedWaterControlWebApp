@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+  <title>{{ title }}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Font Awesome Fonts-->
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='vendor/fontawesome-free/css/all.min.css') }}">
+  <!-- Bootstrap 4 CSS-->
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='vendor/datatables/dataTables.bootstrap4.css') }}">
+  <!-- Custom styles for this template-->
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/sb-admin.css') }}">
+</head>
+
+<body id="page-top">
+    <nav id="nav-placeholder" class="navbar navbar-expand navbar-dark bg-dark static-top">
+    {% include 'nav.html' %}
+  </nav>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul id="sidebar" class="sidebar navbar-nav">
+          {% include 'sidebar.html' %}
+        </ul>
+
+
+        {% block body %}{% endblock %}
+
+
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+
+        <!-- Core plugin JavaScript-->
+        <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+
+        <!-- Page level plugin JavaScript-->
+        <script src="{{ url_for('static', filename='vendor/chart.js/Chart.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='vendor/datatables/jquery.dataTables.js') }}"></script>
+        <script src="{{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.js') }}"></script>
+
+
+        <!-- Custom scripts for all pages-->
+        <script src="{{ url_for('static', filename='js/sb-admin.min.js') }}"></script>
+
+
+        <!-- Demo scripts for this page-->
+        <script src="{{ url_for('static', filename='js/demo/datatables-demo.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/demo/chart-area-demo.js') }}"></script>
+    </div>
+</body>
+
+
+</html>

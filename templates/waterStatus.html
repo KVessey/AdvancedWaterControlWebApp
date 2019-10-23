@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{{ url_for('home') }}">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Water Status</li>
+        </ol>
+
+        <!-- Page Content -->
+        <h1>Water Status</h1>
+        <hr>
+          <!-- ### NEED TO PUT {{ text }} here to display text from flask server -->
+<!--
+        <p><a href="/auto/water/ON"><button>Turn ON Auto Watering</button></a></p>
+        <p><a href="/auto/water/OFF"><button>Turn OFF Auto Watering</button></a></p>
+        <p><a href="/water"><button>Water Once</button></a></p>
+-->
+        <div class="container">
+            <div class="row">
+                <h3 style="margin-bottom: 30px">Device Water Configuration:</h3>
+            </div>
+            <div class="row">
+                <div class="col-4 water_content">
+                    <p>Check the last time the device watered:</p>
+                </div>
+                <div class="col-md-auto">
+                    <p><a href="/last_watered"><button class="btn btn-secondary">Check last time watered</button></a></p> <p>{{text}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="alert alert-warning alert-dismissible fade show">
+                    <strong>Warning!</strong> Turning Auto Watering ON will keep the auto watering feature ON until the user turns the feature OFF
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 water_content">
+                    <p>Auto Watering:</p>
+                </div>
+                <div class="col-md-auto">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-secondary active">
+                          <input type="radio" name="options" id="option1" value="option1" autocomplete="off" checked><a href="/auto/water/OFF" style="color:white; text-decoration:none">OFF</a>
+                      </label>
+                      <label class="btn btn-secondary">
+                          <input type="radio" name="options" id="option2" value="option2" autocomplete="off"><a href="/auto/water/ON" style="color:white; text-decoration:none">ON</a>
+                      </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 water_content">
+                    <p>Water Once:</p>
+                </div>
+                <div class="col-md-auto">
+                    <p><a href="/water"><button class="btn btn-secondary">Activate</button></a></p>
+                </div>
+            </div>
+            
+        </div>
+          
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Advanced Water Control Web Application 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+{% endblock %}

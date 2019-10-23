@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-home"></i>
+          <span>Home</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <h6 class="dropdown-header">Raspberry Pi Dashboard:</h6>
+            <!-- TODO: ADD href="{{ url_for('plant_configuration') }} FOR DASHBOARDS -->
+          <a class="dropdown-item" href="dashboard1.html">Raspberry Pi #1</a>
+          <a class="dropdown-item" href="dashboard2.html">Raspberry Pi #2</a>
+        </div>
+      </li>
+        
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('home') }}">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Pages</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <h6 class="dropdown-header">Status Pages:</h6>
+            <a class="dropdown-item" href="{{ url_for('server_status') }}">Server Status</a>
+            <a class="dropdown-item" href="{{ url_for('water_status') }}">Water Status</a>
+            <a class="dropdown-item" href="{{ url_for('plant_configuration') }}">Plant Configuration</a>
+            <a class="dropdown-item" href="{{ url_for('alerts') }}">Alerts</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('reports') }}">
+          <i class="fas fa-fw fa-file"></i>
+          <span>Reports</span>
+        </a>
+      </li>
+  </nav>
+
+</html>
