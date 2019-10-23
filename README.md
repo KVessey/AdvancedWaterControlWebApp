@@ -21,10 +21,10 @@ On windows, open the command prompt and enter:
 Pip should come with Python version 3+. If pip is not installed, recheck the version of Python which is installed
 
 To setup the application on the Raspberry Pi, we must run the following commands to include the python packages:
-* pip install RPi.GPIO
-* pip install flask
-* pip install flask-sqlalchemy
-* pip install psutil
+* `pip install RPi.GPIO`
+* `pip install flask`
+* `pip install flask-sqlalchemy`
+* `pip install psutil`
 
 ## Usage
 
