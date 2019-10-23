@@ -10,13 +10,13 @@ To begin using the Advanced Water Control Web App, use the following steps to ge
 ## Setup
 ### Python Packages
 1. First we need to make sure Python is installed and up to date. On windows, open the command prompt and enter:
-> `python -V`
+ `python -V`
 
 User should see a python version. If your version is less than 3, it is best to update to the latest version of python
 
 2. Check the version of pip
 On windows, open the command prompt and enter:
-> pip -V
+ `pip -V`
 
 Pip should come with Python version 3+. If pip is not installed, recheck the version of Python which is installed
 
@@ -39,7 +39,7 @@ After installation, run `npm install` and then run `npm start` which will open u
 
 ## Bugs and Issues
 
-Have a bug or an issue with this template? [Open a new issue](https://github.com/BlackrockDigital/startbootstrap-sb-admin/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](http://startbootstrap.com/template-overviews/sb-admin/).
+Have a bug or an issue with this template? [Open a new issue](https://github.com/KVessey/AdvancedWaterControlWebApp/issues) here on GitHub
 
 
 ## About
