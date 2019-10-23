@@ -21,8 +21,47 @@
         </div>        
         <hr>
           
-        <p>The Current timestamp on this server:  {{time}} </p>
-        <p>Last time the Server was restarted: {{ restart_time }}</p>
+        <div class="col-xl-4 col-sm-6 mb-3">
+            <div class="card text-dark bg-light o-hidden h-100">
+              <div class="card-body">
+                <div class="card-body-icon">
+                  <i class="fas fa-fw fa-check-circle"></i>
+                </div>
+                <div class="mr-5">Server Status:</div>
+              </div>
+              <div class="card-footer text-dark clearfix small z-1">
+                <span class="float-left bg-success" style="color:white; padding: 10px">Operational</span>
+              </div>
+            </div>
+      </div>
+                              
+        <div class="col-xl-4 col-sm-6 mb-3">
+            <div class="card text-dark bg-light o-hidden h-100">
+              <div class="card-body">
+                <div class="card-body-icon">
+                  <i class="fas fa-fw fa-server"></i>
+                </div>
+                <div class="mr-5">The Current timestamp on this server:</div>
+              </div>
+              <div class="card-footer text-dark clearfix small z-1">
+                <span class="float-left bg-info" style="color:white; padding: 10px">{{time}}</span>
+              </div>
+            </div>
+      </div>
+          
+      <div class="col-xl-4 col-sm-6 mb-3">
+            <div class="card text-dark bg-light o-hidden h-100">
+              <div class="card-body">
+                <div class="card-body-icon">
+                  <i class="fas fa-fw fa-plug"></i>
+                </div>
+                <div class="mr-5">Last time the Server was restarted:</div>
+              </div>
+              <div class="card-footer text-dark clearfix small z-1">
+                <span class="float-left bg-warning" style="color:white; padding: 10px">ADD RESTART TIME {{ restart_time }}</span>
+              </div>
+            </div>
+      </div>
 
       </div>
       <!-- /.container-fluid -->
