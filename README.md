@@ -56,3 +56,6 @@ Start Bootstrap is an open source library of free Bootstrap templates and themes
 ## Future Work For AWCWA
 - [ ] Create User Login page
 - [ ] Add multiple plants to single Pi device
+
+## References
+* https://dzone.com/articles/flask-101-adding-a-database
