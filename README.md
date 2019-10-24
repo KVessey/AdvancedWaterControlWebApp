@@ -59,3 +59,7 @@ Start Bootstrap is an open source library of free Bootstrap templates and themes
 
 ## References
 * https://dzone.com/articles/flask-101-adding-a-database
+* https://dzone.com/articles/flask-101-adding-editing-and-displaying-data
+* https://gist.github.com/taniarascia/cb7d10cc3dbb5bcfaf974b2279cc5e37
+* https://dzone.com/articles/flask-101-how-to-add-a-search-form
+* https://dzone.com/articles/using-docker-for-python-flask-development
