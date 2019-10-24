@@ -29,6 +29,7 @@ This will import all of the dependencies needed for this project, including:
 * `flask`
 * `flask-sqlalchemy`
 * `psutil`
+* `Flask-WTF`
 
 ## Usage
 
