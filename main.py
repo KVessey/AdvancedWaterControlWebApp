@@ -21,6 +21,7 @@ def template(title = "Advanced Water Control Web App", text = ""):
         }
     return templateDate
 
+
 @app.route("/")
 def home():
     templateData = template()
