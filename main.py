@@ -1,10 +1,12 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, url_for, flash, redirect, request
 import psutil
 import datetime
 import water
 import os
 from app import app
-from db_setup import init_db
+from db_setup import init_db, db_session
+from forms import PlantSearchForm, PlantForm
+from models import Plant
 
 init_db()
 
@@ -24,9 +26,68 @@ def home():
     templateData = template()
     return render_template('index.html', **templateData)
 
-@app.route('/plant_configuration')
+@app.route('/plant_configuration', methods=['GET', 'POST'])
 def plant_configuration():
-    return render_template('plantConfiguration.html')
+    search = PlantSearchForm(request.form)
+    if request.method == 'POST':
+        return search_results(search)
+
+    return render_template('plantConfiguration.html', form=search)
+
+# Plant Config DB Results
+@app.route('/results')
+def search_results(search):
+    results = []
+    search_string = search.data['search']
+    if search.data['search'] == '':
+        qry = db_session.query(Plant)
+        results = qry.all()
+    if not results:
+        flash('No results found!')
+        return redirect('/plant_configuration')
+    else:
+        # display results
+        return render_template('results.html', results=results)
+
+@app.route('/new_plant', methods=['GET', 'POST'])
+def new_plant():
+    """
+    Add a new Plant
+    """
+
+    form = PlantForm(request.form)
+
+    if request.method == 'POST' and form.validate():
+        # save the plant
+        plant = Plant("Bermuda", "2", "Today", "Grass")
+        #SOMETHING STILL ISNT SENDING FORM WITH CORRECT PARAMS
+        # HARDCODING FOR NOW
+        #save_changes(plant, form, new=True)
+        flash('Plant created successfully!')
+        return redirect('/plant_configuration')
+ 
+    return render_template('new_plant.html', form=form)
+
+def save_changes(plant, form, new=False):
+    """
+    Save the changes to the database
+    """
+    # Get data from form and assign it to the correct attributes
+    # of the SQLAlchemy table object
+    plant = Plant()
+
+    plant.name = form.plant.data
+    plant.water_needed = form.water_needed.data
+    plant.last_watered = form.last_watered.data
+    plant.plant_type = form.plant_type.data
+ 
+    if new:
+        # Add the new album to the database
+        db_session.add(plant)
+ 
+    # commit the data to the database
+    db_session.commit()
+
 
 @app.route('/server_status')
 def server_status():

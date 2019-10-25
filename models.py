@@ -1,5 +1,5 @@
 # models.py
- 
+
 from app import db
 
 class Device(db.Model):
@@ -20,13 +20,15 @@ class Plant(db.Model):
     name = db.Column(db.String)
     water_needed = db.Column(db.String)
     last_watered = db.Column(db.String)
+    plant_type = db.Column(db.String)
 
     device_id = db.Column(db.Integer, db.ForeignKey("devices.id"))
     device = db.relationship("Device", backref=db.backref(
         "plants", order_by=id), lazy=True)
 
-    def __init__(self, name, water_needed, last_watered):
+    def __init__(self, name, water_needed, last_watered, plant_type):
         """"""
         self.name = name
         self.water_needed = water_needed
         self.last_watered = last_watered
+        self.plant_type = plant_type

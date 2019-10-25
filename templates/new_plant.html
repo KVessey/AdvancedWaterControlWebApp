@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{{ url_for('home') }}">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Plant Configuration</li>
+        </ol>
+        <h3 >Plant Configuration Data Table </h3>
+ 
+            {% from "_formhelpers.html" import render_field %}
+            <form method=post>
+                <dl>
+                    {{ render_field(form.name) }}
+                    {{ render_field(form.water_needed) }}
+                    {{ render_field(form.last_watered) }}
+                    {{ render_field(form.plant_type) }}
+                </dl>
+                <p><input type=submit value=Submit>
+            </form>
+          
+    <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Advanced Water Control Web Application 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+{% endblock %}
