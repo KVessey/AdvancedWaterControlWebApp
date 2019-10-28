@@ -10,19 +10,32 @@
           <li class="breadcrumb-item">
             <a href="{{ url_for('home') }}">Dashboard</a>
           </li>
-          <li class="breadcrumb-item active">Plant Configuration</li>
+          <li class="breadcrumb-item">
+            <a href="{{ url_for('plant_configuration') }}">Plant Configuration</a>
+          </li>
+          <li class="breadcrumb-item active">New Plant</li>
         </ol>
         <h3 >Plant Configuration Data Table </h3>
  
-            {% from "_formhelpers.html" import render_field %}
-            <form method=post>
-                <dl>
-                    {{ render_field(form.name) }}
-                    {{ render_field(form.water_needed) }}
-                    {{ render_field(form.last_watered) }}
-                    {{ render_field(form.plant_type) }}
-                </dl>
-                <p><input type=submit value=Submit>
+            <form action="#" method="post">
+               <div class="form-group">
+                   <label for="name">Name:</label>
+                   <input type="text" maxlength="100" name="name" placeholder="Name of the Plant">
+
+                   <label for="author">Water Needed:</label>
+                   <input maxlength="100" name="water_needed" placeholder="Amount of Water Needed">
+
+                   <label for="last_watered">Last Watered:</label>
+                   <input maxlength="100" name="last_watered" placeholder="Last Watered">
+
+                   <label for="plant_type">Plant Type:</label>
+                   <input maxlength="100" name="plant_type" placeholder="Plant Type">
+
+                   <label for="device_id">Device Id:</label>
+                   <input maxlength="100" name="device_id" placeholder="Raspberry Pi Device Id">
+
+                   <button type="submit">Create New Plant</button>
+               </div>
             </form>
           
     <!-- /.container-fluid -->

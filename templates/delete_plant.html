@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{{ url_for('home') }}">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{{ url_for('plant_configuration') }}">Plant Configuration</a>
+          </li>
+          <li class="breadcrumb-item active">Delete Plant</li>
+        </ol>
+        <h3 >Delete Plant </h3>
+           <h3> Are you sure you want to delete this plant? </h3>
+            <form action="#" method='post'>
+                <button type="submit">Delete</button>
+                <a href='{{url_for('plant_configuration')}}'>
+                <button>Cancel</button>
+                </a>
+            </form>
+          
+    <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Advanced Water Control Web Application 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+{% endblock %}

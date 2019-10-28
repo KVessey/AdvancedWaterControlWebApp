@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{{ url_for('home') }}">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item">
+              <a href="{{ url_for('plant_configuration') }}">Plant Configuration</a>
+          </li>
+          <li class="breadcrumb-item active">Edit Plant</li>
+        </ol>
+        <h3 >Edit Plant </h3>
+ 
+            <form action="{{ url_for('editPlant',plant_id = plant.id)}}" method="post">
+                <div class="form-group">
+                    <label for="name">Title:</label>
+                    <input type="text" class="form-control" name="name" value="{{plant.name }}">
+                    <button type="submit"> SAVE</button>
+                    <a href='{{url_for('plant_configuration')}}'>
+                        <button>Cancel</button>
+                    </a>
+                </div>
+            </form>
+    <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Advanced Water Control Web Application 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+{% endblock %}

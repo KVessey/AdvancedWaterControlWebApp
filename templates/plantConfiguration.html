@@ -59,26 +59,21 @@
         </div>
 -->
           
-<a href="{{ url_for('new_plant') }}"> New Plant </a>
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class=flashes>
-            {% for message in messages %}
-              <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
-        {% from "_formhelpers.html" import render_field %}
-        <form method=post>
-          <dl>
-            {{ render_field(form.select) }}
-            <p>
-            {{ render_field(form.search) }}
-          </dl>
-          <p><input type=submit value=Search>
-        </form>
+<a href="{{ url_for('newPlant') }}"> New Plant </a>
 
+
+    <ol>
+        {% for plant in plants %}
+        <li> {{plant.name}}</li>
+        <a href="{{url_for('editPlant', plant_id = plant.id )}}">
+            Edit
+        </a>
+        <a href="{{url_for('deletePlant', plant_id = plant.id )}}" style="margin-left: 10px;">
+            Delete
+        </a>
+        <br> <br>
+        {% endfor %}
+    </ol>
       </div>
          
       <!-- /.container-fluid -->

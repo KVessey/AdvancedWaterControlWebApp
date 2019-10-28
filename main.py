@@ -1,14 +1,22 @@
-from flask import Flask, render_template, url_for, flash, redirect, request
+from flask import Flask, render_template, url_for, flash, redirect, request, jsonify
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from db_setup import Base, Plant, Device
 import psutil
 import datetime
 import water
 import os
-from app import app
-from db_setup import init_db, db_session
-from forms import PlantSearchForm, PlantForm
-from models import Plant
 
-init_db()
+
+app = Flask(__name__, static_url_path='/static')
+
+
+# Connect to Database and create database session
+engine = create_engine('sqlite:///database.db?check_same_thread=False')
+Base.metadata.bind = engine
+
+DBSession = sessionmaker(bind=engine)
+session = DBSession()
 
 
 def template(title="Advanced Water Control Web App", text=""):
@@ -28,70 +36,127 @@ def home():
     return render_template('index.html', **templateData)
 
 
-@app.route('/plant_configuration', methods=['GET', 'POST'])
+@app.route('/plant_configuration')
 def plant_configuration():
-    search = PlantSearchForm(request.form)
+    plants = session.query(Plant).all()
+    return render_template('plantConfiguration.html', plants=plants)
+
+
+@app.route('/plants/new/', methods=['GET', 'POST'])
+def newPlant():
     if request.method == 'POST':
-        return search_results(search)
-
-    return render_template('plantConfiguration.html', form=search)
-
-
-# Plant Config DB Results
-@app.route('/results')
-def search_results(search):
-    results = []
-    search_string = search.data['search']
-    if search.data['search'] == '':
-        qry = db_session.query(Plant)
-        results = qry.all()
-    if not results:
-        flash('No results found!')
-        return redirect('/plant_configuration')
+        newPlant = Plant(name=request.form['name'],
+                       water_needed=request.form['water_needed'],
+                       last_watered=request.form['last_watered'],
+                       plant_type=request.form['plant_type'],
+                       device_id=request.form['device_id'])
+        session.add(newPlant)
+        session.commit()
+        return redirect(url_for('plant_configuration'))
     else:
-        # display results
-        return render_template('results.html', results=results)
+        return render_template('new_plant.html')
 
 
-@app.route('/new_plant', methods=['GET', 'POST'])
-def new_plant():
-    """
-    Add a new Plant
-    """
-
-    form = PlantForm(request.form)
-
-    if request.method == 'POST' and form.validate():
-        # save the plant
-        plant = Plant("Bermuda", "2", "Today", "Grass")
-        # SOMETHING STILL ISNT SENDING FORM WITH CORRECT PARAMS
-        # HARDCODING FOR NOW
-        # save_changes(plant, form, new=True)
-        flash('Plant created successfully!')
-        return redirect('/plant_configuration')
-
-    return render_template('new_plant.html', form=form)
+# This will let us Update our plants and save it in our database
+@app.route("/plants/<int:plant_id>/edit/", methods=['GET', 'POST'])
+def editPlant(plant_id):
+    editedPlant = session.query(Plant).filter_by(id=plant_id).one()
+    if request.method == 'POST':
+        if request.form['name']:
+            editedPlant.name = request.form['name']
+            session.add(editedPlant)
+            session.commit()
+            return redirect(url_for('plant_configuration'))
+    else:
+        return render_template('edit_plant.html', plant=editedPlant)
 
 
-def save_changes(plant, form, new=False):
-    """
-    Save the changes to the database
-    """
-    # Get data from form and assign it to the correct attributes
-    # of the SQLAlchemy table object
-    plant = Plant()
+# This will let us Delete our plant
+@app.route('/plants/<int:plant_id>/delete/', methods=['GET', 'POST'])
+def deletePlant(plant_id):
+    plantToDelete = session.query(Plant).filter_by(id=plant_id).one()
+    if request.method == 'POST':
+        session.delete(plantToDelete)
+        session.commit()
+        return redirect(url_for('plant_configuration', plant_id=plant_id))
+    else:
+        return render_template('delete_plant.html', plant=plantToDelete)
 
-    plant.name = form.plant.data
-    plant.water_needed = form.water_needed.data
-    plant.last_watered = form.last_watered.data
-    plant.plant_type = form.plant_type.data
 
-    if new:
-        # Add the new album to the database
-        db_session.add(plant)
+"""
+BEGIN api functions for plant database
+"""
+def get_plants():
+    plants = session.query(Plant).all()
+    return jsonify(plants=[p.serialize for p in plants])
 
-    # commit the data to the database
-    db_session.commit()
+
+def get_plant(plant_id):
+    plants = session.query(Plant).filter_by(id=plant_id).one()
+    return jsonify(plants=plants.serialize)
+
+
+def makeANewPlant(name, water_needed, last_watered, plant_type, device_id):
+    addedPlant = Plant(name=name, water_needed=water_needed, last_watered=last_watered, plant_type=plant_type, device_id=device_id)
+    session.add(addedPlant)
+    session.commit()
+    return jsonify(Plant=addedPlant.serialize)
+
+
+def updatePlant(id, name, water_needed, last_watered, plant_type, device_id):
+    updatedPlant = session.query(Plant).filter_by(id=id).one()
+    if not name:
+        updatedPlant.name = name
+    if not water_needed:
+        updatedPlant.water_needed = water_needed
+    if not last_watered:
+        updatedPlant.last_watered = last_watered
+    if not plant_type:
+        updatedPlant.plant_type = plant_type
+    if not device_id:
+        updatedPlant.device_id = device_id
+    session.add(updatedPlant)
+    session.commit()
+    return 'Updated a Plant with id %s' % id
+
+
+def deleteAPlant(id):
+    plantToDelete = session.query(Plant).filter_by(id=id).one()
+    session.delete(plantToDelete)
+    session.commit()
+    return 'Removed Plant with id %s' % id
+
+@app.route('/plantsApi', methods=['GET', 'POST'])
+def plantsFunction():
+    if request.method == 'GET':
+        return get_plants()
+    elif request.method == 'POST':
+        name = request.args.get('name', '')
+        water_needed = request.args.get('water_needed', '')
+        last_watered = request.args.get('last_watered', '')
+        plant_type = request.args.get('plant_type', '')
+        device_id = request.args.get('device_id', '')
+        return makeANewPlant(name, water_needed, last_watered, plant_type, device_id)
+
+
+@app.route('/plantsApi/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+def plantsFunctionId(id):
+    if request.method == 'GET':
+        return get_plant(id)
+
+    elif request.method == 'PUT':
+        name = request.args.get('name', '')
+        water_needed = request.args.get('water_needed', '')
+        last_watered = request.args.get('last_watered', '')
+        plant_type = request.args.get('plant_type', '')
+        device_id = request.args.get('device_id', '')
+        return updatePlant(name, water_needed, last_watered, plant_type, device_id)
+
+    elif request.method == 'DELETE':
+        return deleteAPlant(id)
+"""
+END api functions for plant database
+"""
 
 
 @app.route('/server_status')
@@ -104,18 +169,18 @@ def server_status():
 def water_status():
     waterStatus = template()
     return render_template('waterStatus.html', **waterStatus) \
- \
- \
+
+
 @app.route('/alerts')
 def alerts():
     return render_template('alerts.html') \
- \
- \
+
+
 @app.route('/reports')
 def reports():
     return render_template('reports.html') \
- \
- \
+
+
 @app.route("/last_watered")
 def check_last_watered():
     templateData = template(text="water.get_last_watered()")
