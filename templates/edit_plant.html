@@ -16,12 +16,25 @@
           <li class="breadcrumb-item active">Edit Plant</li>
         </ol>
         <h3 >Edit Plant </h3>
- 
+
             <form action="{{ url_for('editPlant',plant_id = plant.id)}}" method="post">
                 <div class="form-group">
-                    <label for="name">Title:</label>
-                    <input type="text" class="form-control" name="name" value="{{plant.name }}">
-                    <button type="submit"> SAVE</button>
+                    <label for="name">Name:</label>
+                   <input type="text" maxlength="100" name="name" placeholder="Current Plant Name: {{plant.name}}">
+
+                   <label for="author">Water Needed:</label>
+                   <input maxlength="100" name="water_needed" placeholder="Current Amt of Water Needed: {{plant.water_needed}}">
+
+                   <label for="last_watered">Last Watered:</label>
+                   <input maxlength="100" name="last_watered" placeholder="Current Last Watered: {{plant.last_watered}}">
+
+                   <label for="plant_type">Plant Type:</label>
+                   <input maxlength="100" name="plant_type" placeholder="Current Plant Type: {{plant.plant_type}}">
+
+                   <label for="device_id">Device Id:</label>
+                   <input maxlength="100" name="device_id" placeholder="Current Device: {{plant.device_id}}">
+
+                   <button type="submit">Update Plant</button>
                     <a href='{{url_for('plant_configuration')}}'>
                         <button>Cancel</button>
                     </a>

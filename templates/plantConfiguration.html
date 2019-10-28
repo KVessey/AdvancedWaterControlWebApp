@@ -13,67 +13,72 @@
           <li class="breadcrumb-item active">Plant Configuration</li>
         </ol>
         <h3 >Plant Configuration Data Table </h3>
-<!--
+
+      <div class="row">
+                <div class="col-md-auto water_content" style="text-align: left ; padding-left: 50px">
+                    <p>Add a New Plant:</p>
+                </div>
+                <div class="col-md-auto">
+                    <p>
+                        <button class="btn btn-secondary" >
+                            <a href="{{ url_for('newPlant') }}" style="color:white; text-decoration:none"> New Plant </a>
+                        </button></p>
+                    <p>{{text}}</p>
+                </div>
+      </div>
+
         <div class="card mb-3">
           <div class="card-header">
             <i class="fas fa-table"></i>
-            Plant Configurations</div>
+                Plant Configurations
+          </div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
+                    <th>Plant Id</th>
                     <th>Plant Name</th>
-                    <th>ID</th>
-                    <th>Device Registered</th>
+                    <th>Water Needed</th>
                     <th>Last Watered</th>
+                    <th>Plant Type</th>
+                    <th>Device Id</th>
+                    <th>Edit/Delete</th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
+                    <th>Plant Id</th>
                     <th>Plant Name</th>
-                    <th>ID</th>
-                    <th>Device Registered</th>
+                    <th>Water Needed</th>
                     <th>Last Watered</th>
+                    <th>Plant Type</th>
+                    <th>Device Id</th>
+                    <th>Edit/Delete</th>
                   </tr>
                 </tfoot>
                 <tbody>
-                  <tr>
-                    <td contenteditable="true">Live Oak Tree</td>
-                    <td>OAK-001</td>
-                    <td>Raspberry Pi #1</td>
-                    <td>10/14/2019</td>
-                  </tr>
-                  <tr>
-                    <td>St Augustine Grass</td>
-                    <td>GRASS-001</td>
-                    <td>Raspberry Pi #2</td>
-                    <td>10/01/2019</td>
-                  </tr>
-
-                </tbody>
+                     {% for plant in plants %}
+                      <tr>
+                        <td>{{plant.id}}</td>
+                        <td>{{plant.name}}</td>
+                        <td>{{plant.water_needed}}</td>
+                        <td>{{plant.last_watered}}</td>
+                        <td>{{plant.plant_type}}</td>
+                        <td>{{plant.device_id}}</td>
+                        <td>
+                            <a href="{{url_for('editPlant', plant_id = plant.id )}}">Edit</a>
+                            <a href="{{url_for('deletePlant', plant_id = plant.id )}}" style="margin-left: 10px;">Delete</a>
+                        </td>
+                      </tr>
+                     {% endfor %}
+                 </tbody>
               </table>
             </div>
           </div>
           <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
--->
-          
-<a href="{{ url_for('newPlant') }}"> New Plant </a>
 
-
-    <ol>
-        {% for plant in plants %}
-        <li> {{plant.name}}</li>
-        <a href="{{url_for('editPlant', plant_id = plant.id )}}">
-            Edit
-        </a>
-        <a href="{{url_for('deletePlant', plant_id = plant.id )}}" style="margin-left: 10px;">
-            Delete
-        </a>
-        <br> <br>
-        {% endfor %}
-    </ol>
       </div>
          
       <!-- /.container-fluid -->

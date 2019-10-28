@@ -62,8 +62,12 @@ def newPlant():
 def editPlant(plant_id):
     editedPlant = session.query(Plant).filter_by(id=plant_id).one()
     if request.method == 'POST':
-        if request.form['name']:
+        # if request.form['name']:
             editedPlant.name = request.form['name']
+            editedPlant.water_needed = request.form['water_needed']
+            editedPlant.last_watered = request.form['last_watered']
+            editedPlant.plant_type = request.form['plant_type']
+            editedPlant.device_id = request.form['device_id']
             session.add(editedPlant)
             session.commit()
             return redirect(url_for('plant_configuration'))
