@@ -51,7 +51,6 @@ def home():
 @app.route('/plant_configuration')
 def plant_configuration():
     plants = session.query(Plant).all()
-    update = 10
     return render_template('plantConfiguration.html', plants=plants)
 
 
