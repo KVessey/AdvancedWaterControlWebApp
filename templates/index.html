@@ -93,65 +93,68 @@
             <i class="fas fa-chart-area"></i>
             Watering History</div>
           <div class="card-body">
-            <canvas id="myAreaChart" width="100%" height="30"></canvas>
+            <canvas id="myAreaChart" width="100%" height="20"></canvas>
           </div>
 <!--            TODO: Add timestamp from last water here-->
           <div class="card-footer small text-muted">Updated at {{time}}</div>
         </div>
 
-        <!-- DataTables Example -->
-        <div class="card mb-3">
+        <!-- Plant datatable from database -->
+          <div class="card mb-3">
           <div class="card-header">
             <i class="fas fa-table"></i>
-            Plant Information</div>
+                Plant Configurations
+              <a href="{{ url_for('newPlant') }}" style="float:right; color:white; text-decoration:none"> <button class="btn btn-success" ><i class="fas fa-plus"></i></button></a>
+          </div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
+                    <th>Plant Id</th>
                     <th>Plant Name</th>
-                    <th>Plant ID</th>
-                    <th>Location</th>
-                    <th>Moisture</th>
+                    <th>Water Needed</th>
                     <th>Last Watered</th>
-                    <th>Required Amount of Water (in Inches)</th>
+                    <th>Plant Type</th>
+                    <th>Device Id</th>
+                    <th>Edit/Delete</th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
+                    <th>Plant Id</th>
                     <th>Plant Name</th>
-                    <th>Plant ID</th>
-                    <th>Device ID</th>
-                    <th>Moisture</th>
+                    <th>Water Needed</th>
                     <th>Last Watered</th>
-                    <th>Required Amount of Water (in Inches)</th>
+                    <th>Plant Type</th>
+                    <th>Device Id</th>
+                    <th>Edit/Delete</th>
                   </tr>
                 </tfoot>
                 <tbody>
-                  <tr>
-<!--                      TODO: Pull plants from database and add link here based on plant id-->
-                    <td><a href="#">Bermuda Grass</a></td>
-                    <td>GRASS-001</td>
-                    <td>Raspberry Pi #1</td>
-                    <td>90%</td>
-                    <td>2019/10/01</td>
-                    <td>1.00</td>
-                  </tr>
-                  <tr>
-                    <td>Live Oak Tree</td>
-                    <td>OAK-001</td>
-                    <td>Raspberry Pi #2</td>
-                    <td>20%</td>
-                    <td>2019/09/29</td>
-                    <td>1.50</td>
-                  </tr>
-
-                </tbody>
+                     {% for plant in plants %}
+                      <tr>
+                        <td>{{plant.id}}</td>
+                        <td>{{plant.name}}</td>
+                        <td>{{plant.water_needed}}</td>
+                        <td>{{plant.last_watered}}</td>
+                        <td>{{plant.plant_type}}</td>
+                        <td>{{plant.device_id}}</td>
+                        <td>
+                            <a href="{{url_for('editPlant', plant_id = plant.id )}}"><button class="btn btn-primary">Edit</button></a>
+                            <a href="{{url_for('deletePlant', plant_id = plant.id )}}" style="margin-left: 10px;"><button class="btn btn-danger">Delete</button></a>
+                        </td>
+                      </tr>
+                     {% endfor %}
+                 </tbody>
               </table>
             </div>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          <div class="card-footer small text-muted">Updated at {{ time }}</div>
         </div>
+      <!-- End plant datatable from db -->
+
+      </div>
 
       </div>
       <!-- /.container-fluid -->

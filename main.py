@@ -7,9 +7,7 @@ import datetime
 import water
 import os
 
-
 app = Flask(__name__, static_url_path='/static')
-
 
 # Connect to Database and create database session
 engine = create_engine('sqlite:///database.db?check_same_thread=False')
@@ -22,23 +20,38 @@ session = DBSession()
 def template(title="Advanced Water Control Web App", text=""):
     now = datetime.datetime.now()
     timeString = now
-    templateDate = {
+    templateData = {
         'title': title,
         'time': timeString,
         'text': text
     }
-    return templateDate
+    return templateData
+
+
+def serverStatusTemplate(title="Advanced Water Control Web App", text=""):
+    now = datetime.datetime.now()
+    timeString = now
+    restartTime = restart_time
+    templateData = {
+        'title': title,
+        'time': timeString,
+        'restart_time': restartTime,
+        'text': text
+    }
+    return templateData
 
 
 @app.route("/")
 def home():
     templateData = template()
-    return render_template('index.html', **templateData)
+    plants = session.query(Plant).all()
+    return render_template('index.html', **templateData, plants=plants)
 
 
 @app.route('/plant_configuration')
 def plant_configuration():
     plants = session.query(Plant).all()
+    update = 10
     return render_template('plantConfiguration.html', plants=plants)
 
 
@@ -46,10 +59,10 @@ def plant_configuration():
 def newPlant():
     if request.method == 'POST':
         newPlant = Plant(name=request.form['name'],
-                       water_needed=request.form['water_needed'],
-                       last_watered=request.form['last_watered'],
-                       plant_type=request.form['plant_type'],
-                       device_id=request.form['device_id'])
+                         water_needed=request.form['water_needed'],
+                         last_watered=request.form['last_watered'],
+                         plant_type=request.form['plant_type'],
+                         device_id=request.form['device_id'])
         session.add(newPlant)
         session.commit()
         return redirect(url_for('plant_configuration'))
@@ -62,14 +75,14 @@ def newPlant():
 def editPlant(plant_id):
     editedPlant = session.query(Plant).filter_by(id=plant_id).one()
     if request.method == 'POST':
-       editedPlant.name = request.form['name']
-       editedPlant.water_needed = request.form['water_needed']
-       editedPlant.last_watered = request.form['last_watered']
-       editedPlant.plant_type = request.form['plant_type']
-       editedPlant.device_id = request.form['device_id']
-       session.add(editedPlant)
-       session.commit()
-       return redirect(url_for('plant_configuration'))
+        editedPlant.name = request.form['name']
+        editedPlant.water_needed = request.form['water_needed']
+        editedPlant.last_watered = request.form['last_watered']
+        editedPlant.plant_type = request.form['plant_type']
+        editedPlant.device_id = request.form['device_id']
+        session.add(editedPlant)
+        session.commit()
+        return redirect(url_for('plant_configuration'))
     else:
         return render_template('edit_plant.html', plant=editedPlant)
 
@@ -89,6 +102,8 @@ def deletePlant(plant_id):
 """
 BEGIN api functions for plant database
 """
+
+
 def get_plants():
     plants = session.query(Plant).all()
     return jsonify(plants=[p.serialize for p in plants])
@@ -100,7 +115,8 @@ def get_plant(plant_id):
 
 
 def makeANewPlant(name, water_needed, last_watered, plant_type, device_id):
-    addedPlant = Plant(name=name, water_needed=water_needed, last_watered=last_watered, plant_type=plant_type, device_id=device_id)
+    addedPlant = Plant(name=name, water_needed=water_needed, last_watered=last_watered, plant_type=plant_type,
+                       device_id=device_id)
     session.add(addedPlant)
     session.commit()
     return jsonify(Plant=addedPlant.serialize)
@@ -128,6 +144,7 @@ def deleteAPlant(id):
     session.delete(plantToDelete)
     session.commit()
     return 'Removed Plant with id %s' % id
+
 
 @app.route('/plantsApi', methods=['GET', 'POST'])
 def plantsFunction():
@@ -157,6 +174,8 @@ def plantsFunctionId(id):
 
     elif request.method == 'DELETE':
         return deleteAPlant(id)
+
+
 """
 END api functions for plant database
 """
@@ -164,24 +183,24 @@ END api functions for plant database
 
 @app.route('/server_status')
 def server_status():
-    serverStatus = template()
+    serverStatus = serverStatusTemplate()
     return render_template('serverStatus.html', **serverStatus)
 
 
 @app.route('/water_status')
 def water_status():
     waterStatus = template()
-    return render_template('waterStatus.html', **waterStatus) \
+    return render_template('waterStatus.html', **waterStatus)
 
 
 @app.route('/alerts')
 def alerts():
-    return render_template('alerts.html') \
+    return render_template('alerts.html')
 
 
 @app.route('/reports')
 def reports():
-    return render_template('reports.html') \
+    return render_template('reports.html')
 
 
 @app.route("/last_watered")
@@ -232,4 +251,5 @@ def auto_water(toggle):
 
 
 if __name__ == "__main__":
+    restart_time = datetime.datetime.now()
     app.run(host='0.0.0.0', port=8090, debug=True)
