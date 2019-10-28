@@ -15,31 +15,77 @@
           </li>
           <li class="breadcrumb-item active">Edit Plant</li>
         </ol>
-        <h3 >Edit Plant </h3>
+        <h3 >Edit Plant</h3>
 
-            <form action="{{ url_for('editPlant',plant_id = plant.id)}}" method="post">
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                   <input type="text" maxlength="100" name="name" placeholder="Current Plant Name: {{plant.name}}">
+          <table class="table table-bordered"  width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Plant Id</th>
+                    <th>Plant Name</th>
+                    <th>Water Needed</th>
+                    <th>Last Watered</th>
+                    <th>Plant Type</th>
+                    <th>Device Id</th>
+                  </tr>
+                </thead>
+                <tbody>
+                      <tr>
+                        <td>{{plant.id}}</td>
+                        <td>{{plant.name}}</td>
+                        <td>{{plant.water_needed}}</td>
+                        <td>{{plant.last_watered}}</td>
+                        <td>{{plant.plant_type}}</td>
+                        <td>{{plant.device_id}}</td>
+                      </tr>
+                 </tbody>
+              </table>
 
-                   <label for="author">Water Needed:</label>
-                   <input maxlength="100" name="water_needed" placeholder="Current Amt of Water Needed: {{plant.water_needed}}">
+            <form class="form-horizontal" action="#" method="post">
+              <div class="form-group">
+                  <label class="control-label col-sm-2" for="name">Name:</label>
+                  <div class="col-md-4 col-sm-10">
+                      <input class="form-control" type="text" maxlength="100" id="name" name="name" placeholder="Name of the Plant">
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-sm-2" for="author">Water Needed (in Inches):</label>
+                  <div class="col-md-4 col-sm-10">
+                      <input class="form-control" maxlength="100" name="water_needed" placeholder="Amount of Water Needed (in inches)">
+                  </div>
+              </div>
 
-                   <label for="last_watered">Last Watered:</label>
-                   <input maxlength="100" name="last_watered" placeholder="Current Last Watered: {{plant.last_watered}}">
+              <div class="form-group">
+                  <label class="control-label col-sm-2" for="last_watered">Last Watered:</label>
+                  <div class="col-md-4 col-sm-10">
+                    <input class="form-control" maxlength="100" name="last_watered" placeholder="Last Watered">
+                  </div>
+              </div>
 
-                   <label for="plant_type">Plant Type:</label>
-                   <input maxlength="100" name="plant_type" placeholder="Current Plant Type: {{plant.plant_type}}">
+              <div class="form-group">
+                  <label class="control-label col-sm-2" for="plant_type">Plant Type:</label>
+                  <div class="col-md-4 col-sm-10">
+                       <select class="form-control" name="plant_type">
+                            <option>Grass</option>
+                            <option>Tree</option>
+                            <option>Flower</option>
+                            <option>Other</option>
+                       </select>
+                  </div>
+              </div>
 
-                   <label for="device_id">Device Id:</label>
-                   <input maxlength="100" name="device_id" placeholder="Current Device: {{plant.device_id}}">
+              <div class="form-group">
+                  <label class="control-label col-sm-2" for="device_id">Device Id:</label>
+                  <div class="col-md-4 col-sm-10">
+                      <input class="form-control" maxlength="100" name="device_id" placeholder="Raspberry Pi Device Id">
+                  </div>
+              </div>
 
-                   <button type="submit">Update Plant</button>
-                    <a href='{{url_for('plant_configuration')}}'>
-                        <button>Cancel</button>
-                    </a>
-                </div>
-            </form>
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-success">Update Plant</button>
+                <button type="cancel" class="btn btn-danger">Cancel</button>
+              </div>
+          </form>
+
     <!-- /.container-fluid -->
 
       <!-- Sticky Footer -->

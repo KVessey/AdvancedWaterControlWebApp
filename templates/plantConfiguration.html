@@ -12,25 +12,29 @@
           </li>
           <li class="breadcrumb-item active">Plant Configuration</li>
         </ol>
-        <h3 >Plant Configuration Data Table </h3>
+        <h3 >Plant Configuration</h3>
 
       <div class="row">
-                <div class="col-md-auto water_content" style="text-align: left ; padding-left: 50px">
-                    <p>Add a New Plant:</p>
+          <div class="col-xl-4 col-sm-6 mb-3">
+            <div class="card text-dark bg-light o-hidden h-100">
+              <div class="card-body">
+                <div class="card-body-icon">
+                  <i class="fas fa-fw fa-tree"></i>
                 </div>
-                <div class="col-md-auto">
-                    <p>
-                        <button class="btn btn-secondary" >
-                            <a href="{{ url_for('newPlant') }}" style="color:white; text-decoration:none"> New Plant </a>
-                        </button></p>
-                    <p>{{text}}</p>
-                </div>
+                <div style="font-size: large">Add a New Plant:</div>
+              </div>
+              <div class="card-footer text-dark clearfix small z-1">
+                    <a href="{{ url_for('newPlant') }}" style="color:white; text-decoration:none"> <button class="btn btn-success" >New Plant</button></a>
+              </div>
+            </div>
+        </div>
       </div>
 
         <div class="card mb-3">
           <div class="card-header">
             <i class="fas fa-table"></i>
                 Plant Configurations
+              <a href="{{ url_for('newPlant') }}" style="float:right; color:white; text-decoration:none"> <button class="btn btn-success" ><i class="fas fa-plus"></i></button></a>
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -67,8 +71,8 @@
                         <td>{{plant.plant_type}}</td>
                         <td>{{plant.device_id}}</td>
                         <td>
-                            <a href="{{url_for('editPlant', plant_id = plant.id )}}">Edit</a>
-                            <a href="{{url_for('deletePlant', plant_id = plant.id )}}" style="margin-left: 10px;">Delete</a>
+                            <a href="{{url_for('editPlant', plant_id = plant.id )}}"><button class="btn btn-primary">Edit</button></a>
+                            <a href="{{url_for('deletePlant', plant_id = plant.id )}}" style="margin-left: 10px;"><button class="btn btn-danger">Delete</button></a>
                         </td>
                       </tr>
                      {% endfor %}
