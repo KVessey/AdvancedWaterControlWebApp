@@ -24,12 +24,14 @@ class Device(Base):
     id = Column(Integer, unique=True, primary_key=True)
     name = Column(String(250), nullable=False)
     restart_time = Column(String(250))
+    last_watered = Column(String(250))
 
     @property
     def serialize(self):
         return {
             'name': self.name,
             'restart_time': self.restart_time,
+            'last_watered': self.restart_time,
             'id': self.id,
         }
 

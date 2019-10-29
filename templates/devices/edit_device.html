@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{{ url_for('home') }}">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item">
+              <a href="{{ url_for('device_configuration') }}">Device Configuration</a>
+          </li>
+          <li class="breadcrumb-item active">Edit Device</li>
+        </ol>
+        <h3 >Edit Device</h3>
+
+          <table class="table table-bordered"  width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Device Id</th>
+                    <th>Device Name</th>
+                    <th>Last Restart Time</th>
+                    <th>Last Time Watered</th>
+                  </tr>
+                </thead>
+                <tbody>
+                      <tr>
+                        <td>{{device.id}}</td>
+                        <td>{{device.name}}</td>
+                        <td>{{device.restart_time}}</td>
+                        <td>{{device.last_watered}}</td>
+                      </tr>
+                 </tbody>
+              </table>
+
+            <form class="form-horizontal" action="#" method="post">
+              <div class="form-group">
+                  <label class="control-label col-sm-2" for="name">Name:</label>
+                  <div class="col-md-4 col-sm-10">
+                      <input class="form-control" type="text" maxlength="100" id="name" name="name" placeholder="Name of the Device">
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-sm-2" for="author">Last Restart Time:</label>
+                  <div class="col-md-4 col-sm-10">
+                      <input class="form-control" maxlength="100" name="restart_time" placeholder="Last time device was restarted">
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label class="control-label col-sm-2" for="last_watered">Last Watered:</label>
+                  <div class="col-md-4 col-sm-10">
+                    <input class="form-control" maxlength="100" name="last_watered" placeholder="Last time the device was activated">
+                  </div>
+              </div>
+
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-success">Update Device</button>
+                <button type="cancel" class="btn btn-danger">Cancel</button>
+              </div>
+          </form>
+
+    <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Advanced Water Control Web Application 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+{% endblock %}

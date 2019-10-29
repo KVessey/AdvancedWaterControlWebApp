@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{{ url_for('home') }}">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{{ url_for('plant_configuration') }}">Device Configuration</a>
+          </li>
+          <li class="breadcrumb-item active">Delete Device</li>
+        </ol>
+        <h3>Delete Device</h3>
+           <h4>Are you sure you want to delete this device?</h4>
+            <table class="table table-bordered"  width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Device Id</th>
+                    <th>Device Name</th>
+                    <th>Last Restart Time</th>
+                    <th>Last Time Watered</th>
+                  </tr>
+                </thead>
+                <tbody>
+                     <tr>
+                        <td>{{device.id}}</td>
+                        <td>{{device.name}}</td>
+                        <td>{{device.restart_time}}</td>
+                        <td>{{device.last_watered}}</td>
+                      </tr>
+                 </tbody>
+              </table>
+
+            <form action="#" method='post'>
+                <button type="submit" class="btn btn-secondary" >Delete</button>
+                <a href='{{url_for('device_configuration')}}'>
+                <button class="btn btn-secondary">Cancel</button>
+                </a>
+            </form>
+          
+    <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Advanced Water Control Web Application 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+{% endblock %}

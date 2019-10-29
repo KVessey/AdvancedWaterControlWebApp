@@ -16,7 +16,7 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-
+# TEMPLATES
 def template(title="Advanced Water Control Web App", text=""):
     now = datetime.datetime.now()
     timeString = now
@@ -39,8 +39,10 @@ def serverStatusTemplate(title="Advanced Water Control Web App", text=""):
         'text': text
     }
     return templateData
+# END TEMPLATES
 
 
+# Landing Page Route
 @app.route("/")
 def home():
     templateData = template()
@@ -48,14 +50,62 @@ def home():
     return render_template('index.html', **templateData, plants=plants)
 
 
+# Device Configuration
+@app.route('/device_configuration')
+def device_configuration():
+    devices = session.query(Device).all()
+    return render_template('devices/deviceConfiguration.html', devices=devices)
+
+
+@app.route('/devices/new/', methods=['GET', 'POST'])
+def newDevice():
+    if request.method == 'POST':
+        newDevice = Device(name=request.form['name'],
+                         restart_time=request.form['restart_time'],
+                         last_watered=request.form['last_watered'])
+        session.add(newDevice)
+        session.commit()
+        return redirect(url_for('device_configuration'))
+    else:
+        return render_template('devices/new_device.html')
+
+
+@app.route("/devices/<int:device_id>/edit/", methods=['GET', 'POST'])
+def editDevice(device_id):
+    editedDevice = session.query(Device).filter_by(id=device_id).one()
+    if request.method == 'POST':
+        editedDevice.name = request.form['name']
+        editedDevice.restart_time = request.form['restart_time']
+        editedDevice.last_watered = request.form['last_watered']
+        session.add(editedDevice)
+        session.commit()
+        return redirect(url_for('device_configuration'))
+    else:
+        return render_template('devices/edit_device.html', device=editedDevice)
+
+
+@app.route('/devices/<int:device_id>/delete/', methods=['GET', 'POST'])
+def deleteDevice(device_id):
+    deviceToDelete = session.query(Device).filter_by(id=device_id).one()
+    if request.method == 'POST':
+        session.delete(deviceToDelete)
+        session.commit()
+        return redirect(url_for('device_configuration', device_id = device_id))
+    else:
+        return render_template('devices/delete_device.html', device = deviceToDelete)
+
+
+
+# Plant Configuration
 @app.route('/plant_configuration')
 def plant_configuration():
     plants = session.query(Plant).all()
-    return render_template('plantConfiguration.html', plants=plants)
+    return render_template('plants/plantConfiguration.html', plants=plants)
 
 
 @app.route('/plants/new/', methods=['GET', 'POST'])
 def newPlant():
+    devices = session.query(Device).all()
     if request.method == 'POST':
         newPlant = Plant(name=request.form['name'],
                          water_needed=request.form['water_needed'],
@@ -66,27 +116,26 @@ def newPlant():
         session.commit()
         return redirect(url_for('plant_configuration'))
     else:
-        return render_template('new_plant.html')
+        return render_template('plants/new_plant.html', devices=devices)
 
 
-# This will let us Update our plants and save it in our database
 @app.route("/plants/<int:plant_id>/edit/", methods=['GET', 'POST'])
 def editPlant(plant_id):
+    devices = session.query(Device).all()
     editedPlant = session.query(Plant).filter_by(id=plant_id).one()
     if request.method == 'POST':
         editedPlant.name = request.form['name']
         editedPlant.water_needed = request.form['water_needed']
         editedPlant.last_watered = request.form['last_watered']
         editedPlant.plant_type = request.form['plant_type']
-        editedPlant.device_id = request.form['device_id']
+        editedPlant.device_id = request.form['device_id']        
         session.add(editedPlant)
         session.commit()
         return redirect(url_for('plant_configuration'))
     else:
-        return render_template('edit_plant.html', plant=editedPlant)
+        return render_template('plants/edit_plant.html', plant=editedPlant, devices=devices)
 
 
-# This will let us Delete our plant
 @app.route('/plants/<int:plant_id>/delete/', methods=['GET', 'POST'])
 def deletePlant(plant_id):
     plantToDelete = session.query(Plant).filter_by(id=plant_id).one()
@@ -95,7 +144,7 @@ def deletePlant(plant_id):
         session.commit()
         return redirect(url_for('plant_configuration', plant_id=plant_id))
     else:
-        return render_template('delete_plant.html', plant=plantToDelete)
+        return render_template('plants/delete_plant.html', plant=plantToDelete)
 
 
 """
@@ -251,4 +300,6 @@ def auto_water(toggle):
 
 if __name__ == "__main__":
     restart_time = datetime.datetime.now()
-    app.run(host='0.0.0.0', port=8090, debug=True)
+    # FOR HOME COMPUTER REMOTE CONNECTION
+    #app.run(host='192.168.1.85', port=8090, debug=True, threaded=True)
+    app.run(host='0.0.0.0',port=8090, debug=True)

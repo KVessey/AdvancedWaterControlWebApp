@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{{ url_for('home') }}">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Device Configuration</li>
+        </ol>
+        <h3 >Device Configuration</h3>
+
+      <div class="row">
+          <div class="col-xl-4 col-sm-6 mb-3">
+            <div class="card text-dark bg-light o-hidden h-100">
+              <div class="card-body">
+                <div class="card-body-icon">
+                  <i class="fas fa-laptop-code"></i>
+                </div>
+                <div style="font-size: large">Add a New Device:</div>
+              </div>
+              <div class="card-footer text-dark clearfix small z-1">
+                    <a href="{{ url_for('newDevice') }}" style="color:white; text-decoration:none"> <button class="btn btn-success" >New Device</button></a>
+              </div>
+            </div>
+        </div>
+      </div>
+
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+                Device Configurations
+              <a href="{{ url_for('newDevice') }}" style="float:right; color:white; text-decoration:none"> <button class="btn btn-success" ><i class="fas fa-plus"></i></button></a>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Device Id</th>
+                    <th>Device Name</th>
+                    <th>Last Restart Time</th>
+                    <th>Last Time Watered</th>
+                    <th>Edit/Delete</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>Device Id</th>
+                    <th>Device Name</th>
+                    <th>Last Restart Time</th>
+                    <th>Last Time Watered</th>
+                    <th>Edit/Delete</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                     {% for device in devices %}
+                      <tr>
+                        <td>{{device.id}}</td>
+                        <td>{{device.name}}</td>
+                        <td>{{device.restart_time}}</td>
+                        <td>{{device.last_watered}}</td>
+                        <td>
+                            <a href="{{url_for('editDevice', device_id = device.id )}}"><button class="btn btn-primary">Edit</button></a>
+                            <a href="{{url_for('deleteDevice', device_id = device.id )}}" style="margin-left: 10px;"><button class="btn btn-danger">Delete</button></a>
+                        </td>
+                      </tr>
+                     {% endfor %}
+                 </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer small text-muted">Updated at {{time}}</div>
+        </div>
+
+      </div>
+         
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Advanced Water Control Web Application 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+{% endblock %}
