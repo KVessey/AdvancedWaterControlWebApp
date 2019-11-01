@@ -21,25 +21,29 @@
               <div class="form-group">
                   <label class="control-label col-sm-2" for="name">Name:</label>
                   <div class="col-md-4 col-sm-10">
-                      <input class="form-control" type="text" maxlength="100" id="name" name="name" placeholder="Name of the Device">
+                      <input class="form-control" type="text" maxlength="100" id="name" name="name" placeholder="Name of the Device" required>
                   </div>
               </div>
               <div class="form-group">
                   <label class="control-label col-sm-2" for="author">Last Restart Time:</label>
                   <div class="col-md-4 col-sm-10">
-                      <input class="form-control" maxlength="100" name="restart_time" placeholder="Last time device was restarted">
+                      <input class="form-control" maxlength="100" name="restart_time" type="time" placeholder="Last time device was restarted" required>
+                  </div>
+                  <div class="col-md-4 col-sm-10">
+                      <button id="current_ts" class="btn btn-info">Current Timestamp</button>
                   </div>
               </div>
 
               <div class="form-group">
                   <label class="control-label col-sm-2" for="last_watered">Last Watered:</label>
                   <div class="col-md-4 col-sm-10">
-                    <input class="form-control" maxlength="100" name="last_watered" placeholder="Last time the device was activated">
+                    <input class="form-control" maxlength="100" type="date" name="last_watered" placeholder="Last time the device was activated" required>
                   </div>
               </div>
 
               <div class="col-md-4">
                 <button type="submit" class="btn btn-success">Create New Device</button>
+                  <a href="{{ url_for('device_configuration') }}"><button type="button" class="btn btn-danger">Cancel</button></a>
               </div>
           </form>
           

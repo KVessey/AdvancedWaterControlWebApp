@@ -57,7 +57,7 @@
               <div class="form-group">
                   <label class="control-label col-sm-2" for="last_watered">Last Watered:</label>
                   <div class="col-md-4 col-sm-10">
-                    <input class="form-control" maxlength="100" name="last_watered" placeholder="Last Watered">
+                    <input class="form-control" maxlength="100" name="last_watered" type="date" placeholder="Last Watered">
                   </div>
               </div>
 
@@ -86,7 +86,7 @@
 
               <div class="col-md-4">
                 <button type="submit" class="btn btn-success">Update Plant</button>
-                <button type="cancel" class="btn btn-danger">Cancel</button>
+                <a href="{{ url_for('plant_configuration') }}"><button type="button" class="btn btn-danger">Cancel</button></a>
               </div>
           </form>
 
