@@ -47,7 +47,8 @@ def serverStatusTemplate(title="Advanced Water Control Web App", text=""):
 def home():
     templateData = template()
     plants = session.query(Plant).all()
-    return render_template('index.html', **templateData, plants=plants)
+    devices = session.query(Device).all()
+    return render_template('index.html', **templateData, plants=plants, devices=devices)
 
 
 # Device Configuration
@@ -100,7 +101,8 @@ def deleteDevice(device_id):
 @app.route('/plant_configuration')
 def plant_configuration():
     plants = session.query(Plant).all()
-    return render_template('plants/plantConfiguration.html', plants=plants)
+    devices = session.query(Device).all()
+    return render_template('plants/plantConfiguration.html', plants=plants, devices=devices)
 
 
 @app.route('/plants/new/', methods=['GET', 'POST'])
@@ -138,13 +140,14 @@ def editPlant(plant_id):
 
 @app.route('/plants/<int:plant_id>/delete/', methods=['GET', 'POST'])
 def deletePlant(plant_id):
+    devices = session.query(Device).all()
     plantToDelete = session.query(Plant).filter_by(id=plant_id).one()
     if request.method == 'POST':
         session.delete(plantToDelete)
         session.commit()
         return redirect(url_for('plant_configuration', plant_id=plant_id))
     else:
-        return render_template('plants/delete_plant.html', plant=plantToDelete)
+        return render_template('plants/delete_plant.html', plant=plantToDelete, devices=devices)
 
 
 """
@@ -232,27 +235,32 @@ END api functions for plant database
 @app.route('/server_status')
 def server_status():
     serverStatus = serverStatusTemplate()
-    return render_template('serverStatus.html', **serverStatus)
+    devices = session.query(Device).all()
+    return render_template('serverStatus.html', **serverStatus, devices=devices)
 
 
 @app.route('/water_status')
 def water_status():
     waterStatus = template()
-    return render_template('waterStatus.html', **waterStatus)
+    devices = session.query(Device).all()
+    return render_template('waterStatus.html', **waterStatus, devices=devices)
 
 
 @app.route('/alerts')
 def alerts():
-    return render_template('alerts.html')
+    devices = session.query(Device).all()
+    return render_template('alerts.html', devices=devices)
 
 
 @app.route('/reports')
 def reports():
-    return render_template('reports.html')
+    devices = session.query(Device).all()
+    return render_template('reports.html', devices=devices)
 
 
 @app.route("/last_watered")
 def check_last_watered():
+    devices = session.query(Device).all()
     templateData = template(text="water.get_last_watered()")
     return render_template('waterStatus.html', **templateData)
 
