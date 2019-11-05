@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{{ url_for('home') }}">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">API Documentation</li>
+        </ol>
+
+        <!-- Page Content -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1>API Documentation</h1>
+            </div>
+        </div>        
+        <hr>
+          
+        <div class="col-xl-4 col-sm-6 mb-3">
+            <div class="card text-dark bg-light o-hidden h-100">
+              <div class="card-body">
+                <div class="card-body-icon">
+                  <i class="fas fa-fw fa-check-circle"></i>
+                </div>
+                <div class="mr-5">Device API</div>
+              </div>
+              <div class="card-footer text-dark clearfix small z-1">
+                <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#getDevice" aria-expanded="false" aria-controls="collapseExample">
+                    GET
+                </button>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#putDevice" aria-expanded="false" aria-controls="collapseExample">
+                    PUT
+                </button>
+                <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#postDevice" aria-expanded="false" aria-controls="collapseExample">
+                    POST
+                </button>
+                <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#deleteDevice" aria-expanded="false" aria-controls="collapseExample">
+                    DELETE
+                </button>
+              </div>
+                <!-- Collapsable Menu Items -->
+                <div class="collapse" id="getDevice">
+                  <div class="card card-body">                      
+                      GET Request
+                  </div>
+                </div>
+                <div class="collapse" id="putDevice">
+                  <div class="card card-body">
+                    PUT Request
+                  </div>
+                </div>
+                <div class="collapse" id="postDevice">
+                  <div class="card card-body">
+                    POST Request
+                  </div>
+                </div>
+                <div class="collapse" id="deleteDevice">
+                  <div class="card card-body">
+                    DELETE Request
+                  </div>
+                </div>
+            </div>
+        </div>
+                              
+        <div class="col-xl-4 col-sm-6 mb-3">
+            <div class="card text-dark bg-light o-hidden h-100">
+              <div class="card-body">
+                <div class="card-body-icon">
+                  <i class="fas fa-fw fa-server"></i>
+                </div>
+                <div class="mr-5">Plant API</div>
+              </div>
+              <div class="card-footer text-dark clearfix small z-1">
+                <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#getPlant" aria-expanded="false" aria-controls="collapseExample">
+                    GET
+                </button>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#putPlant" aria-expanded="false" aria-controls="collapseExample">
+                    PUT
+                </button>
+                <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#postPlant" aria-expanded="false" aria-controls="collapseExample">
+                    POST
+                </button>
+                <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#deletePlant" aria-expanded="false" aria-controls="collapseExample">
+                    DELETE
+                </button>
+              </div>
+                <!-- Collapsable Menu Items -->
+                <div class="collapse" id="getPlant">
+                  <div class="card card-body">
+                    GET Request
+                  </div>
+                </div>
+                <div class="collapse" id="putPlant">
+                  <div class="card card-body">
+                    PUT Request
+                  </div>
+                </div>
+                <div class="collapse" id="postPlant">
+                  <div class="card card-body">
+                    POST Request
+                  </div>
+                </div>
+                <div class="collapse" id="deletePlant">
+                  <div class="card card-body">
+                    DELETE Request
+                  </div>
+                </div>
+            </div>
+      </div>
+
+
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Advanced Water Control Web Application 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+{% endblock %}

@@ -51,6 +51,13 @@ def home():
     return render_template('index.html', **templateData, plants=plants, devices=devices)
 
 
+# API Documentation Page 
+@app.route('/api_documentation')
+def api_documentation():
+    devices = session.query(Device).all()
+    return render_template('/apiDocumentation.html', devices=devices)
+
+
 # Device Configuration
 @app.route('/device_configuration')
 def device_configuration():
