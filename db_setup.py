@@ -23,6 +23,7 @@ class Device(Base):
     __tablename__ = "devices"
     id = Column(Integer, unique=True, primary_key=True)
     name = Column(String(250), nullable=False)
+    ip_address = Column(String(50), nullable=False)
     restart_time = Column(String(250))
     last_watered = Column(String(250))
 
@@ -30,6 +31,7 @@ class Device(Base):
     def serialize(self):
         return {
             'name': self.name,
+            'ip_address': self.ip_address,
             'restart_time': self.restart_time,
             'last_watered': self.restart_time,
             'id': self.id,

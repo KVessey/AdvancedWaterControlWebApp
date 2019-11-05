@@ -22,6 +22,7 @@
                   <tr>
                     <th>Device Id</th>
                     <th>Device Name</th>
+                    <th>Device IP Address</th>
                     <th>Last Restart Time</th>
                     <th>Last Time Watered</th>
                   </tr>
@@ -30,6 +31,7 @@
                       <tr>
                         <td>{{device.id}}</td>
                         <td>{{device.name}}</td>
+                        <td>{{device.ip_address}}</td>
                         <td>{{device.restart_time}}</td>
                         <td>{{device.last_watered}}</td>
                       </tr>
@@ -41,6 +43,12 @@
                   <label class="control-label col-sm-2" for="name">Name:</label>
                   <div class="col-md-4 col-sm-10">
                       <input class="form-control" type="text" maxlength="100" id="name" name="name" placeholder="Name of the Device" required>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-sm-2" for="ip_address">IP Address:</label>
+                  <div class="col-md-4 col-sm-10">
+                      <input class="form-control" type="text" maxlength="100" id="ip_address" name="ip_address" placeholder="Device IP Address" required>
                   </div>
               </div>
               <div class="form-group">

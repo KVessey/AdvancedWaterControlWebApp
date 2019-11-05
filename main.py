@@ -62,6 +62,7 @@ def device_configuration():
 def newDevice():
     if request.method == 'POST':
         newDevice = Device(name=request.form['name'],
+                         ip_address=request.form['ip_address'],
                          restart_time=request.form['restart_time'],
                          last_watered=request.form['last_watered'])
         session.add(newDevice)
@@ -76,6 +77,7 @@ def editDevice(device_id):
     editedDevice = session.query(Device).filter_by(id=device_id).one()
     if request.method == 'POST':
         editedDevice.name = request.form['name']
+        editedDevice.ip_address=request.form['ip_address'],
         editedDevice.restart_time = request.form['restart_time']
         editedDevice.last_watered = request.form['last_watered']
         session.add(editedDevice)
