@@ -34,13 +34,13 @@ This will import all of the dependencies needed for this project, including:
 ## Usage
 
 ### Basic Usage
+This web application is configured with a cron job which automatically boots when the Raspberry Pi device is switched on. This is done to make the process seemless when adding a new Pi device. Details on configuring the cron job will be listed in the Advanced Usage section below.
 
-NOTES TO ADD TO README:
-* DB will be automatically configured when app is started with db_init() script
-* cron job will automatically start web application
+To manually boot the web application, simply run the following command in your project directory:
+`python main.py`
+This will boot the Flask web application, and generate the database with empty tables for the user to later populate.
 
-
-After downloading, simply edit the HTML and CSS files included with the template in your favorite text editor to make changes. These are the only files you need to worry about, you can ignore everything else! To preview the changes you make to the code, you can open the `index.html` file in your web browser.
+Currently, the database has two tables (Devices and Plants), which store data related to the device the user is registering as well as the plant information which is configurable. The user should navigate to the Device Configuration page or the Plant Configuration page in the web application to add/edit an entry from the database.
 
 ### Advanced Usage
 
@@ -54,13 +54,10 @@ NOTES TO ADD TO README:
 Have a bug or an issue with this template? [Open a new issue](https://github.com/KVessey/AdvancedWaterControlWebApp/issues) here on GitHub
 
 
-## About
-
-Start Bootstrap is an open source library of free Bootstrap templates and themes. All of the free templates and themes on Start Bootstrap are released under the MIT license, which means you can use them for any purpose, even for commercial projects.
-
 ## Future Work For AWCWA
 - [ ] Create User Login page
-- [ ] Add multiple plants to single Pi device
+- [x] Add multiple plants to single Pi device
+- [ ] Configure cron job to automatically boot web server upon device startup
 
 ## References
 * https://dzone.com/articles/flask-101-adding-a-database
