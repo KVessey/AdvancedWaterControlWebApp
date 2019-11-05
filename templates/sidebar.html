@@ -5,15 +5,14 @@
           <span>Home</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <h6 class="dropdown-header">Raspberry Pi Dashboard:</h6>
-            <!-- TODO: ADD href="{{ url_for('plant_configuration') }} FOR DASHBOARDS -->
-          <a class="dropdown-item" href="{{ url_for('device_configuration') }}">Configure a Device</a>
+            <h6 class="dropdown-header">Raspberry Pi Dashboard:</h6>
+            <a class="dropdown-item" href="{{ url_for('device_configuration') }}">Configure a Device</a>
           
             <div class="dropdown-divider"></div>
             <h6 class="dropdown-header">Current Devices:</h6>
             {% if devices is defined and devices|length > 0 %}
                   {% for device in devices %}
-                      <a class="dropdown-item" href="{{ url_for('home') }}">{{device.name}}</a>
+                    <a class="dropdown-item" href="{{ url_for('home') }}">{{device.name}}</a>
                   {% endfor %}
             {% else %}
                     <a class="dropdown-item" href="{{ url_for('newDevice') }}">Add a Device</a>

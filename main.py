@@ -105,6 +105,82 @@ def deleteDevice(device_id):
         return render_template('devices/delete_device.html', device = deviceToDelete)
 
 
+"""
+BEGIN api functions for DEVICE database
+"""
+
+
+def get_devices():
+    devices = session.query(Device).all()
+    return jsonify(devices=[d.serialize for d in devices])
+
+
+def get_device(device_id):
+    devices = session.query(Device).filter_by(id=device_id).one()
+    return jsonify(devices=devices.serialize)
+
+
+def makeANewDevice(name, ip_address, restart_time, last_watered):
+    addedDevice = Device(name=name, ip_address=ip_address, restart_time=restart_time, last_watered=last_watered)
+    session.add(addedDevice)
+    session.commit()
+    return jsonify(Device=addedDevice.serialize)
+
+
+def updateDevice(id, name, ip_address, restart_time, last_watered):
+    updatedDevice = session.query(Plant).filter_by(id=id).one()
+    if not name:
+        updatedDevice.name = name
+    if not ip_address:
+        updatedDevice.ip_address = ip_address
+    if not restart_time:
+        updatedDevice.restart_time = restart_time
+    if not last_watered:
+        updatedDevice.last_watered = last_watered
+    session.add(updatedDevice)
+    session.commit()
+    return 'Updated a Device with id %s' % id
+
+
+def deleteADevice(id):
+    deviceToDelete = session.query(Device).filter_by(id=id).one()
+    session.delete(deviceToDelete)
+    session.commit()
+    return 'Removed Device with id %s' % id
+
+
+@app.route('/devicesApi', methods=['GET', 'POST'])
+def devicesFunction():
+    if request.method == 'GET':
+        return get_devices()
+    elif request.method == 'POST':
+        name = request.args.get('name', '')
+        ip_address = request.args.get('ip_address', '')
+        restart_time = request.args.get('restart_time', '')
+        last_watered = request.args.get('last_watered', '')
+        return makeANewDevice(name, ip_address, restart_time, last_watered)
+
+
+@app.route('/devicesApi/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+def devicesFunctionId(id):
+    if request.method == 'GET':
+        return get_device(id)
+
+    elif request.method == 'PUT':
+        name = request.args.get('name', '')
+        ip_address = request.args.get('ip_address', '')
+        restart_time = request.args.get('restart_time', '')
+        last_watered = request.args.get('last_watered', '')
+        return makeANewDevice(name, ip_address, restart_time, last_watered)
+
+    elif request.method == 'DELETE':
+        return deleteADevice(id)
+    
+
+"""
+END api functions for DEVICE database
+"""
+
 
 # Plant Configuration
 @app.route('/plant_configuration')

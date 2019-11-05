@@ -25,9 +25,10 @@
             <div class="card text-dark bg-light o-hidden h-100">
               <div class="card-body">
                 <div class="card-body-icon">
-                  <i class="fas fa-fw fa-check-circle"></i>
+                  <i class="fas fa-laptop-code"></i>
                 </div>
-                <div class="mr-5">Device API</div>
+                    <div class="mr-5"><h4>Device API</h4></div>
+                    <div style="padding-left: 20px">{URL}:{PORT}/devicesApi</div>
               </div>
               <div class="card-footer text-dark clearfix small z-1">
                 <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#getDevice" aria-expanded="false" aria-controls="collapseExample">
@@ -36,7 +37,7 @@
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#putDevice" aria-expanded="false" aria-controls="collapseExample">
                     PUT
                 </button>
-                <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#postDevice" aria-expanded="false" aria-controls="collapseExample">
+                <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#postDevice" aria-expanded="false" aria-controls="collapseExample" style="color: white">
                     POST
                 </button>
                 <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#deleteDevice" aria-expanded="false" aria-controls="collapseExample">
@@ -45,8 +46,10 @@
               </div>
                 <!-- Collapsable Menu Items -->
                 <div class="collapse" id="getDevice">
-                  <div class="card card-body">                      
-                      GET Request
+                  <div class="card card-body"> 
+                      This request retrieves the list of all devices in the Database
+                      <div class="dropdown-divider"></div>
+                      
                   </div>
                 </div>
                 <div class="collapse" id="putDevice">
@@ -55,7 +58,7 @@
                   </div>
                 </div>
                 <div class="collapse" id="postDevice">
-                  <div class="card card-body">
+                  <div class="card card-body" >
                     POST Request
                   </div>
                 </div>
@@ -71,9 +74,10 @@
             <div class="card text-dark bg-light o-hidden h-100">
               <div class="card-body">
                 <div class="card-body-icon">
-                  <i class="fas fa-fw fa-server"></i>
+                  <i class="fas fa-fw fa-tree"></i>
                 </div>
-                <div class="mr-5">Plant API</div>
+                  <div class="mr-5"><h4>Plant API</h4></div>
+                  <div style="padding-left: 20px">{URL}:{PORT}/plantsApi</div>
               </div>
               <div class="card-footer text-dark clearfix small z-1">
                 <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#getPlant" aria-expanded="false" aria-controls="collapseExample">
@@ -82,7 +86,7 @@
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#putPlant" aria-expanded="false" aria-controls="collapseExample">
                     PUT
                 </button>
-                <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#postPlant" aria-expanded="false" aria-controls="collapseExample">
+                <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#postPlant" aria-expanded="false" aria-controls="collapseExample" style="color: white">
                     POST
                 </button>
                 <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#deletePlant" aria-expanded="false" aria-controls="collapseExample">
