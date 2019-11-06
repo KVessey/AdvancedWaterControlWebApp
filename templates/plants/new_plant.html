@@ -53,11 +53,15 @@
               <div class="form-group">
                   <label class="control-label col-sm-2" for="device_id">Device Id:</label>
                   <div class="col-md-4 col-sm-10">
-                      {% for device in devices %}
-                      <select class="form-control" name="device_id">
-                            <option>{{device.name}}</option>
-                       </select>
-                      {% endfor %}
+                      {% if devices is defined and devices|length > 0 %}
+                          {% for device in devices %}
+                          <select class="form-control" name="device_id">
+                                <option>{{device.name}}</option>
+                           </select>
+                          {% endfor %}
+                      {% else %}
+                         <a href="{{ url_for('newDevice') }}"><button type="button" class="btn btn-info">Add New Device</button></a>
+                      {% endif %}
                   </div>
               </div>
 

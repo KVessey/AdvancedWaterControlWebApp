@@ -49,22 +49,78 @@
                   <div class="card card-body"> 
                       This request retrieves the list of all devices in the Database
                       <div class="dropdown-divider"></div>
-                      
+                      <p>REQUEST - GET: localhost:8090/devicesApi</p>
+                      <p>RESPONSE - </p>
+                      <table>
+                          <tr><td>{</td></tr>
+                          <tr><td style="padding-left: 20px">"devices": [</td></tr>
+                          <tr><td style="padding-left: 20px">{</td></tr>
+                          <tr><td style="padding-left: 25px">"id": 1,</td></tr>
+                          <tr><td style="padding-left: 25px">"ip_address": "192.168.0.1",</td></tr>
+                          <tr><td style="padding-left: 25px">"last_watered": "01:00",</td></tr>
+                          <tr><td style="padding-left: 25px">"name": "Kyle Pi",</td></tr>
+                          <tr><td style="padding-left: 25px">"restart_time": "01:00"</td></tr>
+                          <tr><td style="padding-left: 20px">},</td></tr>
+                          <tr><td style="padding-left: 25px">{</td></tr>
+                          <tr><td style="padding-left: 25px">"id": 2,</td></tr>
+                          <tr><td style="padding-left: 25px">"ip_address": "172.168.0.1",</td></tr>
+                          <tr><td style="padding-left: 25px">"last_watered": "10:10",</td></tr>
+                          <tr><td style="padding-left: 25px"d>"name": "API Demo Device",</td></tr>
+                          <tr><td style="padding-left: 25px">"restart_time": "10:10AM"</td></tr>
+                          <tr><td style="padding-left: 20px">} ]</td></tr>
+                          <tr><td>}</td></tr>
+                      </table>
                   </div>
                 </div>
                 <div class="collapse" id="putDevice">
                   <div class="card card-body">
-                    PUT Request
+                    This request updates the device based on ID
+                    <div class="dropdown-divider"></div>
+                      <p>REQUEST - PUT: localhost:8090/devicesApi/1</p>
+                      <p>RESPONSE - </p>
+                      <table>
+                          <tr><td>{</td></tr>
+                          <tr><td style="padding-left: 20px">"devices": [</td></tr>
+                          <tr><td style="padding-left: 20px">{</td></tr>
+                          <tr><td style="padding-left: 25px">"id": 1,</td></tr>
+                          <tr><td style="padding-left: 25px">"ip_address": "192.168.0.1",</td></tr>
+                          <tr><td style="padding-left: 25px">"last_watered": "01:00",</td></tr>
+                          <tr><td style="padding-left: 25px">"name": "Kyle Pi",</td></tr>
+                          <tr><td style="padding-left: 25px">"restart_time": "01:00"</td></tr>
+                          <tr><td style="padding-left: 20px">} ]</td></tr>
+                          <tr><td>}</td></tr>
+                      </table>
                   </div>
                 </div>
                 <div class="collapse" id="postDevice">
                   <div class="card card-body" >
-                    POST Request
+                      This request updates the device based on ID
+                      <div class="dropdown-divider"></div>
+                      <p>REQUEST - POST: localhost:8090/devicesApi/1</p>
+                      <p>RESPONSE - </p>
+                      <table>
+                          <tr><td>{</td></tr>
+                          <tr><td style="padding-left: 20px">"devices": [</td></tr>
+                          <tr><td style="padding-left: 20px">{</td></tr>
+                          <tr><td style="padding-left: 25px">"id": 1,</td></tr>
+                          <tr><td style="padding-left: 25px">"ip_address": "192.168.0.1",</td></tr>
+                          <tr><td style="padding-left: 25px">"last_watered": "01:00",</td></tr>
+                          <tr><td style="padding-left: 25px">"name": "Kyle Pi",</td></tr>
+                          <tr><td style="padding-left: 25px">"restart_time": "01:00"</td></tr>
+                          <tr><td style="padding-left: 20px">} ]</td></tr>
+                          <tr><td>}</td></tr>
+                      </table>
                   </div>
                 </div>
                 <div class="collapse" id="deleteDevice">
                   <div class="card card-body">
-                    DELETE Request
+                      This request deletes the device based on ID
+                      <div class="dropdown-divider"></div>
+                      <p>REQUEST - DELETE: localhost:8090/devicesApi/1</p>
+                      <p>RESPONSE - </p>
+                      <table>
+                          <tr><td>Removed device with ID 1</td></tr>
+                      </table>
                   </div>
                 </div>
             </div>
@@ -96,7 +152,30 @@
                 <!-- Collapsable Menu Items -->
                 <div class="collapse" id="getPlant">
                   <div class="card card-body">
-                    GET Request
+                      This request retrieves the list of all plants in the Database
+                      <div class="dropdown-divider"></div>
+                      <p>REQUEST - GET: localhost:8090/plantsApi</p>
+                      <p>RESPONSE - </p>
+                      <table>
+                          <tr><td>{</td></tr>
+                          <tr><td style="padding-left: 20px">"plants": [</td></tr>
+                          <tr><td style="padding-left: 20px">{</td></tr>
+                          <tr><td style="padding-left: 25px">"id": 1,</td></tr>
+                          <tr><td style="padding-left: 25px">"name": "192.168.0.1",</td></tr>
+                          <tr><td style="padding-left: 25px">"water_needed": "01:00",</td></tr>
+                          <tr><td style="padding-left: 25px">"last_watered": "Kyle Pi",</td></tr>
+                          <tr><td style="padding-left: 25px">"plant_type": "01:00"</td></tr>
+                          <tr><td style="padding-left: 25px">"device_id": ""</td></tr>
+                          <tr><td style="padding-left: 20px">},</td></tr>
+                          <tr><td style="padding-left: 25px">{</td></tr>
+                          <tr><td style="padding-left: 25px">"id": 2,</td></tr>
+                          <tr><td style="padding-left: 25px">"ip_address": "172.168.0.1",</td></tr>
+                          <tr><td style="padding-left: 25px">"last_watered": "10:10",</td></tr>
+                          <tr><td style="padding-left: 25px"d>"name": "API Demo Device",</td></tr>
+                          <tr><td style="padding-left: 25px">"restart_time": "10:10AM"</td></tr>
+                          <tr><td style="padding-left: 20px">} ]</td></tr>
+                          <tr><td>}</td></tr>
+                      </table>
                   </div>
                 </div>
                 <div class="collapse" id="putPlant">
