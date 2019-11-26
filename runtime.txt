@@ -1,0 +1,6 @@
+RPi.GPIO
+flask
+flask-sqlalchemy
+psutil
+Flask-WTF
+flask_table
