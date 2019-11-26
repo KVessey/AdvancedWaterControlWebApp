@@ -1,6 +1,1 @@
-RPi.GPIO
-flask
-flask-sqlalchemy
-psutil
-Flask-WTF
-flask_table
+python-3.7.5
