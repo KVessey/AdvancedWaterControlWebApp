@@ -21,7 +21,7 @@ On windows, open the command prompt and enter:
 Pip should come with Python version 3+. If pip is not installed, recheck the version of Python which is installed
 
 To setup the application on the Raspberry Pi, we must run the following commands to include the python packages:
-* `pip install -r requiremnts/base.txt`
+* `pip install -r requirements/requirements.txt`
 
 This will import all of the dependencies needed for this project, including:
 
